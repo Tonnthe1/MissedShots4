@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Create Event</h2>
+        <form method="POST" action="{{ url_for('create_event') }}">
+            <input type="text" name="name" placeholder="Event Name" required>
+            <input type="text" name="address" placeholder="Event Address" required>
+            <input type="datetime-local" name="time" required>
+            <label>
+                <input type="checkbox" name="online"> Online
+            </label>
+            <button type="submit">Create Event</button>
+        </form>
+    </div>
+</body>
+</html>

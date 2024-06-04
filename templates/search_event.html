@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Event</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('home') }}" class="return-home-button">Return to Home</a>
+        <h2>Search Event</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alerts">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <form method="POST" action="{{ url_for('search_event') }}">
+            <input type="text" name="query" placeholder="Search for an event" required>
+            <button type="submit">Search</button>
+        </form>
+        <a href="{{ url_for('create_event') }}">Can't find the event? Create one!</a>
+        {% if events %}
+            <ul>
+                {% for event in events %}
+                    <li>{{ event.name }} - {{ event.address }} - {{ event.time }} - {{ 'Online' if event.online else 'Offline' }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>
